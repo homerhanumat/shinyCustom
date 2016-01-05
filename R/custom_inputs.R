@@ -1,4 +1,24 @@
-# custom slider ---------
+
+#' Title
+#'
+#' @param inputId
+#' @param label
+#' @param min
+#' @param max
+#' @param value
+#' @param step
+#' @param round
+#' @param ticks
+#' @param animate
+#' @param width
+#' @param sep
+#' @param pre
+#' @param post
+#' @param timeFormat
+#' @param timezone
+#' @param dragRange
+#'
+#' @export
 customSliderInput <- function(inputId, label, min, max, value, step = NULL,
                             round = FALSE,
                             ticks = TRUE, animate = FALSE, width = NULL, sep = ",",
@@ -151,6 +171,18 @@ customSliderInput <- function(inputId, label, min, max, value, step = NULL,
 
 # custom numeric input -----------
 
+#' Title
+#'
+#' @param inputId
+#' @param label
+#' @param value
+#' @param min
+#' @param max
+#' @param step
+#' @param width
+#'
+#' @return
+#' @export
 customNumericInput <- function(inputId, label, value, min = NA, max = NA, step = NA,
                              width = NULL) {
 
@@ -179,8 +211,6 @@ customNumericInput <- function(inputId, label, value, min = NA, max = NA, step =
 #'
 #' @return
 #' @export
-#'
-#' @examples
 customTextInput <- function(inputId, label, value = "") {
   tagList(tags$label(label, `for` = inputId),
           tags$input(id = inputId,

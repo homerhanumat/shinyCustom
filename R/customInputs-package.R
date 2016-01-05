@@ -14,3 +14,4 @@
 #' @keywords package
 #' @import shiny
 #' @importFrom htmltools attachDependencies htmlDependency
+NULL

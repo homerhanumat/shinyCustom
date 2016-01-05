@@ -23,10 +23,11 @@ function padZeros(n, digits) {
 ///////////////
 // customSliderInput
 ////////////////////
-
+/*
 var customSliderDelay = Number(document.getElementById("shinyCustomDiv").getAttribute("data-slider-delay"));
 
 var customSliderPolicy = document.getElementById("shinyCustomDiv").getAttribute("data-slider-policy");
+*/
 
  var customSliderInputBinding = new Shiny.InputBinding();
 $.extend(customSliderInputBinding, {
@@ -171,7 +172,6 @@ $.extend(customSliderInputBinding, {
   }
 });
 
-
 // finally, we register::
 Shiny.inputBindings.register(customSliderInputBinding, 'shiny.customSliderInput');
 
@@ -179,15 +179,15 @@ Shiny.inputBindings.register(customSliderInputBinding, 'shiny.customSliderInput'
 /////////////////
 // custom numeric input
 ////////////////
-
+/*
 var customNumericDelay = Number(document.getElementById("shinyCustomDiv").getAttribute("data-numeric-delay"));
 
 var customNumericPolicy = document.getElementById("shinyCustomDiv").getAttribute("data-numeric-delay-policy");
-
-var slowNumberInputBinding = new Shiny.InputBinding();
-$.extend(slowNumberInputBinding, {
+*/
+var customNumberInputBinding = new Shiny.InputBinding();
+$.extend(customNumberInputBinding, {
   find: function(scope) {
-    return $(scope).find('input[type="slownumber"]');
+    return $(scope).find('input[type="customNumber"]');
   },
   getValue: function(el) {
     var numberVal = $(el).val();
@@ -223,17 +223,17 @@ $.extend(slowNumberInputBinding, {
              step:  Number(el.step) };
   },
   subscribe: function(el, callback) {
-  $(el).on('keyup.slowNumberInputBinding input.slowNumberInputBinding', function(event) {
+  $(el).on('keyup.customNumberInputBinding input.customNumberInputBinding', function(event) {
                if(event.keyCode == 13) { //if enter
                 callback();
                }
              });
-            $(el).on('focusout.slowNumberInputBinding', function(event) { // on losing focus
+            $(el).on('focusout.customNumberInputBinding', function(event) { // on losing focus
               callback();
             });
             },
   unsubscribe: function(el) {
-            $(el).off('.slowNumberInputBinding');
+            $(el).off('.customNumberInputBinding');
             },
   getRatePolicy: function() {
     return {
@@ -243,17 +243,17 @@ $.extend(slowNumberInputBinding, {
   }
 
 });
-Shiny.inputBindings.register(slowNumberInputBinding, 'shiny.slowNumericInput');
+Shiny.inputBindings.register(customNumberInputBinding, 'shiny.customNumericInput');
 
 //////////////////////////////////////////
 // custom textInput with limited reactivity,
 // slightly modified from https://gist.github.com/xiaodaigh/7150112
 //////////////////////////////////////////
-
+/*
 var customTextDelay = Number(document.getElementById("shinyCustomDiv").getAttribute("data-text-delay"));
 
 var customTextPolicy = document.getElementById("shinyCustomDiv").getAttribute("data-text-policy");
-
+*/
 var customTextInputBinding = new Shiny.InputBinding();
               $.extend(customTextInputBinding, {
               find: function(scope) {
