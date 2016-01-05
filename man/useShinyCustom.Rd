@@ -9,16 +9,29 @@ useShinyCustom(slider_policy = "debounce", slider_delay = "250",
   text_policy = "debounce", text_delay = "250")
 }
 \arguments{
-\item{slider_policy}{policy for custom slider}
+\item{slider_policy}{Policy for a custom slider.  Values are 'debounce' (the
+default) and 'throttle'.}
 
-\item{slider_delay}{delay for cusotm slider}
+\item{slider_delay}{Delay for a custom slider.  Values are in milliseconds.  The
+default is 250 (same as for a regular slider).}
 
-\item{text_delay}{}
+\item{numeric_policy}{Policy for a custom numeric input.  Values are 'debounce'
+(the default) and 'throttle'.}
+
+\item{numeric_delay}{Delay for a custom numeric input.  Values are in milliseconds.
+The default is 250 (same as for a regular numeric input).}
+
+\item{text_policy}{Policy for a custom text input.  Values are 'debounce'
+(the default) and 'throttle'.}
+
+\item{text_delay}{Delay for a custom text input.  Values are in milliseconds.
+The default is 250 (same as for a regular text input).}
 }
 \value{
 a tag list
 }
 \description{
-Use the shinyCustom Package
+Injects into the Shiny app the JavaScript required to create
+custom objects.
 }
 

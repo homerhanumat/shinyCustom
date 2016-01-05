@@ -4,12 +4,25 @@
 \alias{customTextInput}
 \title{Custom Text Input}
 \usage{
-customTextInput(inputId, label, value = "")
+customTextInput(inputId, label, value = "", width = NULL,
+  placeholder = NULL)
 }
 \arguments{
-\item{value}{}
+\item{inputId}{The input slot that will be used to access the value.}
+
+\item{label}{Display label for the control, or NULL for no label.}
+
+\item{value}{Initial value.}
+
+\item{width}{The width of the input, e.g. '400px', or '100\%'.}
+
+\item{placeholder}{A character string giving the user a hint as to what
+can be entered into the control. Internet Explorer 8 and 9 do not support
+this option.}
 }
 \description{
-Custom Text Input
+Create a custom input control for entry of unstructured
+text values.  The control updates if and only if the user presses Enter
+or shifts focus away from the control.
 }
 

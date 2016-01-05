@@ -1,23 +1,51 @@
 
-#' Title
+#' Custom Slider Input
 #'
-#' @param inputId
-#' @param label
-#' @param min
-#' @param max
-#' @param value
-#' @param step
-#' @param round
-#' @param ticks
-#' @param animate
-#' @param width
-#' @param sep
-#' @param pre
-#' @param post
-#' @param timeFormat
-#' @param timezone
-#' @param dragRange
+#' Constructs a custom slider widget to select a numeric value
+#' from a range.  Primarily used to customize the rate policy.
 #'
+#' @rdname customSliderInput
+#' @param inputId The input slot that will be used to access the value.
+#' @param label Display label for the control, or NULL for no label.
+#' @param min The minimum value (inclusive) that can be selected.
+#' @param max The maximum value (inclusive) that can be selected.
+#' @param value The initial value of the slider. A numeric vector of length
+#'   one will create a regular slider; a numeric vector of length two will
+#'   create a double-ended range slider. A warning will be issued if the value
+#'   doesn't fit between min and max.
+#' @param step Specifies the interval between each selectable value on the
+#'   slider (if NULL, a heuristic is used to determine the step size). If the
+#'   values are dates, step is in days; if the values are times (POSIXt), step
+#'   is in seconds.
+#' @param round TRUE to round all values to the nearest integer; FALSE if no
+#'   rounding is desired; or an integer to round to that number of digits
+#'   (for example, 1 will round to the nearest 10, and -2 will round to the
+#'   nearest .01). Any rounding will be applied after snapping to the nearest step.
+#' @param ticks \code{FALSE} to hide tick marks, \code{TRUE} to show them
+#'   according to some simple heuristics.
+#' @param animate \code{TRUE} to show simple animation controls with default
+#'   settings; \code{FALSE} not to; or a custom settings list, such as those
+#'   created using \code{\link{animationOptions}}.
+#' @param width The width of the input, e.g., '200px' or '50\%'.
+#' @param sep Separator between thousands places in numbers.
+#' @param pre A prefix string to put in front of the value.
+#' @param post A suffix string to put after the value.
+#' @param timeFormat Only used if the values are Date or POSIXt objects. A time
+#'   format string, to be passed to the Javascript strftime library. See
+#'   \url{https://github.com/samsonjs/strftime} for more details. The allowed
+#'   format specifications are very similar, but not identical, to those for R's
+#'   \code{\link{strftime}} function. For Dates, the default is \code{"\%F"}
+#'   (like \code{"2015-07-01"}), and for POSIXt, the default is \code{"\%F \%T"}
+#'   (like \code{"2015-07-01 15:32:10"}).
+#' @param timezone Only used if the values are POSIXt objects. A string
+#'   specifying the time zone offset for the displayed times, in the format
+#'   \code{"+HHMM"} or \code{"-HHMM"}. If \code{NULL} (the default), times will
+#'   be displayed in the browser's time zone. The value \code{"+0000"} will
+#'   result in UTC time.
+#' @param dragRange This option is used only if it is a range slider (with two
+#'   values). If \code{TRUE} (the default), the range can be dragged. In other
+#'   words, the min and max can be dragged together. If \code{FALSE}, the range
+#'   cannot be dragged.
 #' @export
 customSliderInput <- function(inputId, label, min, max, value, step = NULL,
                             round = FALSE,
@@ -169,19 +197,20 @@ customSliderInput <- function(inputId, label, min, max, value, step = NULL,
 }
 
 
-# custom numeric input -----------
-
-#' Title
+#' Custom Numeric Input
 #'
-#' @param inputId
-#' @param label
-#' @param value
-#' @param min
-#' @param max
-#' @param step
-#' @param width
+#' Create a custom input control for entry of numeric values.
+#' The control updates if and only if the user presses Enter or shifts
+#' focus away from the control.
 #'
-#' @return
+#' @rdname customNumericInput
+#' @param inputId The \code{input} slot that will be used to access the value.
+#' @param label Display label for the control, or NULL for no label.
+#' @param value Initial value.
+#' @param min Minimim allowed value.
+#' @param max Maximum allowed value.
+#' @param step Interval to use when stepping between min and max.
+#' @param width The width of the input, e.g., "200px" or "50\%".
 #' @export
 customNumericInput <- function(inputId, label, value, min = NA, max = NA, step = NA,
                              width = NULL) {
@@ -205,16 +234,34 @@ customNumericInput <- function(inputId, label, value, min = NA, max = NA, step =
 
 #' Custom Text Input
 #'
-#' @param inputId
-#' @param label
-#' @param value
+#' Create a custom input control for entry of unstructured
+#' text values.  The control updates if and only if the user presses Enter
+#' or shifts focus away from the control.
 #'
-#' @return
+#' @rdname customTextInput
+#' @param inputId The input slot that will be used to access the value.
+#' @param label Display label for the control, or NULL for no label.
+#' @param value Initial value.
+#' @param width The width of the input, e.g. '400px', or '100\%'.
+#' @param placeholder A character string giving the user a hint as to what
+#'   can be entered into the control. Internet Explorer 8 and 9 do not support
+#'   this option.
 #' @export
-customTextInput <- function(inputId, label, value = "") {
-  tagList(tags$label(label, `for` = inputId),
-          tags$input(id = inputId,
-                     type = "text", value = value,
-                     class="customTextInput form-control shiny-bound-input"))
+customTextInput <- function(inputId, label, value = "", width = NULL,
+                      placeholder = NULL) {
+
+  div(class = "form-group shiny-input-container",
+      style = if (!is.null(width)) paste0("width: ", validateCssUnit(width), ";"),
+      label %AND% tags$label(label, `for` = inputId),
+      tags$input(id = inputId, type="text", class="customTextInput form-control",
+                 value=value,
+                 placeholder = placeholder)
+  )
 }
+# customTextInput <- function(inputId, label, value = "") {
+#   tagList(tags$label(label, `for` = inputId),
+#           tags$input(id = inputId,
+#                      type = "text", value = value,
+#                      class="customTextInput form-control shiny-bound-input"))
+# }
 

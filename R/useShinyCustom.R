@@ -1,11 +1,20 @@
 #' Use the shinyCustom Package
 #'
-#' @param slider_policy policy for custom slider
-#' @param slider_delay delay for cusotm slider
-#' @param numeric_policy
-#' @param numeric_delay
-#' @param text_policy
-#' @param text_delay
+#' @description Injects into the Shiny app the JavaScript required to create
+#' custom objects.
+#'
+#' @param slider_policy Policy for a custom slider.  Values are 'debounce' (the
+#' default) and 'throttle'.
+#' @param slider_delay Delay for a custom slider.  Values are in milliseconds.  The
+#' default is 250 (same as for a regular slider).
+#' @param numeric_policy Policy for a custom numeric input.  Values are 'debounce'
+#' (the default) and 'throttle'.
+#' @param numeric_delay Delay for a custom numeric input.  Values are in milliseconds.
+#' The default is 250 (same as for a regular numeric input).
+#' @param text_policy Policy for a custom text input.  Values are 'debounce'
+#' (the default) and 'throttle'.
+#' @param text_delay Delay for a custom text input.  Values are in milliseconds.
+#' The default is 250 (same as for a regular text input).
 #'
 #' @return a tag list
 #' @export

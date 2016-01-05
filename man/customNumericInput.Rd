@@ -2,15 +2,29 @@
 % Please edit documentation in R/custom_inputs.R
 \name{customNumericInput}
 \alias{customNumericInput}
-\title{Title}
+\title{Custom Numeric Input}
 \usage{
 customNumericInput(inputId, label, value, min = NA, max = NA, step = NA,
   width = NULL)
 }
 \arguments{
-\item{width}{}
+\item{inputId}{The \code{input} slot that will be used to access the value.}
+
+\item{label}{Display label for the control, or NULL for no label.}
+
+\item{value}{Initial value.}
+
+\item{min}{Minimim allowed value.}
+
+\item{max}{Maximum allowed value.}
+
+\item{step}{Interval to use when stepping between min and max.}
+
+\item{width}{The width of the input, e.g., "200px" or "50\%".}
 }
 \description{
-Title
+Create a custom input control for entry of numeric values.
+The control updates if and only if the user presses Enter or shifts
+focus away from the control.
 }
 
