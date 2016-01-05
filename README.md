@@ -6,6 +6,7 @@ To see an example, try:
 
 ```
 install.packages("htmltools")
-shiny::runGithub("homerhanumat/shinyCustom", subdir = "examples/shinyapp",
-                 display.mode = "showcase")
+devtools::install_github("homerhanumat/shinyCustom")
+shiny::runApp(system.file("examples/shinyapp", package = "shinyCustom"),
+              display.mode = "showcase")
 ```
