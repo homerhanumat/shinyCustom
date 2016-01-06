@@ -187,7 +187,8 @@ var customNumericPolicy = document.getElementById("shinyCustomDiv").getAttribute
 var customNumberInputBinding = new Shiny.InputBinding();
 $.extend(customNumberInputBinding, {
   find: function(scope) {
-    return $(scope).find('input[type="customNumber"]');
+   // return $(scope).find('input[type="customNumber"]');
+   return $(scope).find('input.customnumber');
   },
   getValue: function(el) {
     var numberVal = $(el).val();

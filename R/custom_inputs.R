@@ -216,7 +216,8 @@ customNumericInput <- function(inputId, label, value, min = NA, max = NA, step =
                              width = NULL) {
 
   # build input tag
-  inputTag <- tags$input(id = inputId, type = "customnumber", class="form-control",
+  inputTag <- tags$input(id = inputId, type = "number",
+                         class=" customnumber form-control",
                          value = formatNoSci(value))
   if (!is.na(min))
     inputTag$attribs$min = min
