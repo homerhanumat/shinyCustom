@@ -1,6 +1,6 @@
 # shinyCustom
 
-## Inreoduction
+## Introduction
 
 This package is under development.  It automates, to some extent, the creation of custom objects for the RStudio's Shiny framework.
 
