@@ -1,0 +1,81 @@
+---
+title: "Sample RMD"
+author: "Homer White"
+date: "January 6, 2016"
+output: html_document
+runtime: shiny
+---
+
+
+```{r include=FALSE}
+library(shinyCustom)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This R Markdown document is made interactive using Shiny. Unlike the more traditional workflow of creating static reports, you can now create documents that allow your readers to change the assumptions underlying your analysis and see the results immediately. 
+
+To learn more, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
+
+## Custom Slider Input
+
+You can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change.  This demonstrates how a standard R plot can be made interactive by wrapping it in the Shiny `renderPlot` function. The `selectInput` and `sliderInput` functions create the input widgets used to drive the plot.
+
+```{r eruptions, echo=FALSE}
+useShinyCustom(slider_delay = 1500, numeric_delay = 10, text_delay = 10,rmd = TRUE)
+inputPanel(
+  selectInput("n_breaks", label = "Number of bins:",
+              choices = c(10, 20, 35, 50), selected = 20),
+  
+  customSliderInput("bw_adjust", label = "Lazy Bandwidth adjustment:",
+              min = 0.2, max = 2, value = 1, step = 0.2)
+)
+
+renderPlot({
+  hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
+       xlab = "Duration (minutes)", main = "Geyser eruption duration")
+  
+  dens <- density(faithful$eruptions, adjust = input$bw_adjust)
+  lines(dens, col = "blue")
+})
+```
+
+## Custom Text
+
+```{r echo = F}
+inputPanel(
+  customTextInput("text", label = "Patient Text Input")
+)
+renderText({
+  input$text
+})
+```
+
+## Custom Numeric
+
+```{r echo = F}
+useShinyCustom(numeric_delay = 10, text_delay = 10)
+inputPanel(
+  customNumericInput("number", label = "Patient Numeric Input",
+                     min = 0, max = 100, step = 1, value = 50)
+)
+renderText({
+  as.character(input$number)
+})
+```
+
+
+## Embedded Application
+
+It's also possible to embed an entire Shiny application within an R Markdown document using the `shinyAppDir` function. This example embeds a Shiny application located in another directory:
+
+```{r tabsets, echo=FALSE}
+shinyAppDir(
+  system.file("examples/shinyapp", package = "shinyCustom"),
+  options = list(
+    width = "100%", height = 1000
+  )
+)
+```
+
+
+

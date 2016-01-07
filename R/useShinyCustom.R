@@ -15,20 +15,53 @@
 #' (the default) and 'throttle'.
 #' @param text_delay Delay for a custom text input.  Values are in milliseconds.
 #' The default is 250 (same as for a regular text input).
+#' @param rmd Whether or not the app is an interactive R Mardown document.  Default
+#' is \code{FALSE}.
+#' @param html Whether or not this is a Shiny app in which the user interface is
+#' built from a custom HTML file.  Default value is \code{FALSE}.
 #'
 #' @return a tag list
 #' @export
 useShinyCustom <- function(slider_policy = "debounce", slider_delay = "250",
                            numeric_policy = "debounce", numeric_delay = "250",
-                           text_policy = "debounce", text_delay = "250") {
+                           text_policy = "debounce", text_delay = "250",
+                           rmd = FALSE, html = FALSE) {
+  # Dean's comment:
+  # `astext` is FALSE in normal shiny apps where the shinyjs content is returned
+  # as a shiny tag that gets rendered by the Shiny UI, and TRUE in interactive
+  # Rmarkdown documents or in Shiny apps where the user builds the entire UI
+  # manually with HTML, because in those cases the content of shinyjs needs to
+  # be returned as plain text that can be added to the HTML
+  astext <- rmd || html
+
+  # dean's comment:
+  # inject is TRUE when the user builds the entire UI manually with HTML,
+  # because in that case the shinyjs content needs to be injected into the page
+  # using JavaScript
+  inject <- html
+
   code <- makeScript(slider_policy, slider_delay, numeric_policy,
                      numeric_delay, text_policy, text_delay)
   shiny::addResourcePath("customjs", system.file("js", package = "shinyCustom"))
   jsFile <- file.path("customjs", "shinyCustom.js")
-  shiny::tagList(shiny::tags$head(shiny::tags$script(code)),
-                 shiny::tags$head(shiny::tags$script(
-                   src = jsFile))
-                 )
+
+  # if rmd or html, inject inline; if regular shiny, place in head:
+  if ( astext ) {
+    shinyCustomContent <- shiny::tagList(shiny::tags$script(code),
+                                         shiny::tags$script(src = jsFile))
+  } else {
+    shinyCustomContent <- shiny::tagList(shiny::tags$head(shiny::tags$script(code)),
+                                         shiny::tags$head(shiny::tags$script(src = jsFile)))
+  }
+  # if html, inject using Javadcript (??)
+  if (inject) {
+    shinyCustomContent <- as.character(shinyCustomContent)
+    session <- getSession()
+    session$sendCustomMessage('customShiny-inject', shinyCustomContent)
+  } else {
+    shinyCustomContent
+  }
+
 }
 
 
