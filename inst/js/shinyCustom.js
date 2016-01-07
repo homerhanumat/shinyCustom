@@ -23,11 +23,6 @@ function padZeros(n, digits) {
 ///////////////
 // customSliderInput
 ////////////////////
-/*
-var customSliderDelay = Number(document.getElementById("shinyCustomDiv").getAttribute("data-slider-delay"));
-
-var customSliderPolicy = document.getElementById("shinyCustomDiv").getAttribute("data-slider-policy");
-*/
 
  var customSliderInputBinding = new Shiny.InputBinding();
 $.extend(customSliderInputBinding, {
@@ -179,11 +174,7 @@ Shiny.inputBindings.register(customSliderInputBinding, 'shiny.customSliderInput'
 /////////////////
 // custom numeric input
 ////////////////
-/*
-var customNumericDelay = Number(document.getElementById("shinyCustomDiv").getAttribute("data-numeric-delay"));
 
-var customNumericPolicy = document.getElementById("shinyCustomDiv").getAttribute("data-numeric-delay-policy");
-*/
 var customNumberInputBinding = new Shiny.InputBinding();
 $.extend(customNumberInputBinding, {
   find: function(scope) {
@@ -250,11 +241,7 @@ Shiny.inputBindings.register(customNumberInputBinding, 'shiny.customNumericInput
 // custom textInput with limited reactivity,
 // slightly modified from https://gist.github.com/xiaodaigh/7150112
 //////////////////////////////////////////
-/*
-var customTextDelay = Number(document.getElementById("shinyCustomDiv").getAttribute("data-text-delay"));
 
-var customTextPolicy = document.getElementById("shinyCustomDiv").getAttribute("data-text-policy");
-*/
 var customTextInputBinding = new Shiny.InputBinding();
               $.extend(customTextInputBinding, {
               find: function(scope) {

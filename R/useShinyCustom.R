@@ -62,10 +62,11 @@ useShinyCustom <- function(slider_policy = "debounce", slider_delay = "250",
   # If html, inject using Javascript handler.
   # App author needs to put <script src="js/inject.js"></script>`
   # into the head element.
+  # Results so far:  injection succeeeds, but binding does not take place.
   if (inject) {
     shinyCustomContent <- as.character(shinyCustomContent)
-    session <- getSession()
-    session$sendCustomMessage('customShiny-inject', shinyCustomContent)
+    session <- shiny::getDefaultReactiveDomain()
+    session$sendCustomMessage('shinyCustom-inject', shinyCustomContent)
   } else {
     shinyCustomContent
   }
