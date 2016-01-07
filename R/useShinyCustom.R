@@ -26,6 +26,9 @@ useShinyCustom <- function(slider_policy = "debounce", slider_delay = "250",
                            numeric_policy = "debounce", numeric_delay = "250",
                            text_policy = "debounce", text_delay = "250",
                            rmd = FALSE, html = FALSE) {
+
+  #Borrowing Dean Attali's ideas all the way through! https://github.com/daattali/shinyjs
+
   # Dean's comment:
   # `astext` is FALSE in normal shiny apps where the shinyjs content is returned
   # as a shiny tag that gets rendered by the Shiny UI, and TRUE in interactive
@@ -40,20 +43,25 @@ useShinyCustom <- function(slider_policy = "debounce", slider_delay = "250",
   # using JavaScript
   inject <- html
 
-  code <- makeScript(slider_policy, slider_delay, numeric_policy,
+  codeProperties <- makeScript(slider_policy, slider_delay, numeric_policy,
                      numeric_delay, text_policy, text_delay)
   shiny::addResourcePath("customjs", system.file("js", package = "shinyCustom"))
   jsFile <- file.path("customjs", "shinyCustom.js")
 
-  # if rmd or html, inject inline; if regular shiny, place in head:
+  # if rmd or html, inject inline; if regular shiny, place in head.
+  # codeInject will be used only if html.
   if ( astext ) {
-    shinyCustomContent <- shiny::tagList(shiny::tags$script(code),
+    shinyCustomContent <- shiny::tagList(shiny::tags$script(codeProperties),
                                          shiny::tags$script(src = jsFile))
   } else {
-    shinyCustomContent <- shiny::tagList(shiny::tags$head(shiny::tags$script(code)),
+    shinyCustomContent <- shiny::tagList(shiny::tags$head(shiny::tags$script(codeProperties)),
                                          shiny::tags$head(shiny::tags$script(src = jsFile)))
   }
-  # if html, inject using Javadcript (??)
+
+
+  # If html, inject using Javascript handler.
+  # App author needs to put <script src="js/inject.js"></script>`
+  # into the head element.
   if (inject) {
     shinyCustomContent <- as.character(shinyCustomContent)
     session <- getSession()
