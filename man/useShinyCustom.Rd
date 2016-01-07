@@ -6,8 +6,7 @@
 \usage{
 useShinyCustom(slider_policy = "debounce", slider_delay = "250",
   numeric_policy = "debounce", numeric_delay = "250",
-  text_policy = "debounce", text_delay = "250", rmd = FALSE,
-  html = FALSE)
+  text_policy = "debounce", text_delay = "250", rmd = FALSE)
 }
 \arguments{
 \item{slider_policy}{Policy for a custom slider.  Values are 'debounce' (the
@@ -28,11 +27,8 @@ The default is 250 (same as for a regular numeric input).}
 \item{text_delay}{Delay for a custom text input.  Values are in milliseconds.
 The default is 250 (same as for a regular text input).}
 
-\item{rmd}{Whether or not the app is an interactive R Mardown document.  Default
+\item{rmd}{Whether or not the app is an interactive R Markdown document.  Default
 is \code{FALSE}.}
-
-\item{html}{Whether or not this is a Shiny app in which the user interface is
-built from a custom HTML file.  Default value is \code{FALSE}.}
 }
 \value{
 a tag list

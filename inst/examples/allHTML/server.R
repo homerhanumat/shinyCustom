@@ -1,3 +1,5 @@
+# this is a relic from a failed attempt to mke cusomt inputs work in all-html
+
 library(shiny)
 library(shinyCustom)
 

@@ -178,8 +178,7 @@ Shiny.inputBindings.register(customSliderInputBinding, 'shiny.customSliderInput'
 var customNumberInputBinding = new Shiny.InputBinding();
 $.extend(customNumberInputBinding, {
   find: function(scope) {
-   // return $(scope).find('input[type="customNumber"]');
-   return $(scope).find('input.customnumber');
+   return $(scope).find('input.customNumericInput');
   },
   getValue: function(el) {
     var numberVal = $(el).val();
@@ -245,7 +244,7 @@ Shiny.inputBindings.register(customNumberInputBinding, 'shiny.customNumericInput
 var customTextInputBinding = new Shiny.InputBinding();
               $.extend(customTextInputBinding, {
               find: function(scope) {
-              return $(scope).find('.customTextInput');
+              return $(scope).find('input.customTextInput');
               },
               getId: function(el) {
               //return InputBinding.prototype.getId.call(this, el) || el.name;

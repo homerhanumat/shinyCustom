@@ -27,6 +27,8 @@ All three inputs permit the rate policy to be customized.  (For an explanation o
 
 ## Usage
 
+### In a Standard Shiny App
+
 The procedure for invoking the features of the package is inspired by Dean Attali's [`shinyjs`](https://github.com/daattali/shinyjs).  Simply insert a call to `useShinyCustom()` within the UI, preferably near the top.  Here's an example:
 
 ```
@@ -49,8 +51,23 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
+### In an Interactive R Markdown Document
+
+Simply place the call to `useShinyCustom()` at the beginning of the code chunk that contains your first interactive element.  Make sure to set the `rmd` argument to `TRUE`.
+
+```
+useShinyCustom(rmd = TRUE)
+inputPanel(
+  customNumericInput("number", label = "Patient Numeric Input",
+                     min = 0, max = 100, step = 1, value = 50)
+)
+renderText({
+  as.character(input$number)
+})
+```
+
 ## Limitations
 
-At the present time the package can be used only with standard Shiny apps, not with interactive R Markdown documents or with apps where the user interface is built from an HTML file.  That shouldl change soon.
+Currently the package cannot be with used apps in which the entire user interface is built in an `index.html` file.
 
 This package has not undergone much testing.  If you happen upon it feel free to give it a try, but do please post an issue when you find something going wrong.

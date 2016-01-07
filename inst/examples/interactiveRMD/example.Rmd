@@ -53,7 +53,6 @@ renderText({
 ## Custom Numeric
 
 ```{r echo = F}
-useShinyCustom(numeric_delay = 10, text_delay = 10)
 inputPanel(
   customNumericInput("number", label = "Patient Numeric Input",
                      min = 0, max = 100, step = 1, value = 50)

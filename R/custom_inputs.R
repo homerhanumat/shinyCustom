@@ -217,7 +217,7 @@ customNumericInput <- function(inputId, label, value, min = NA, max = NA, step =
 
   # build input tag
   inputTag <- tags$input(id = inputId, type = "number",
-                         class=" customnumber form-control",
+                         class=" customNumericInput form-control",
                          value = formatNoSci(value))
   if (!is.na(min))
     inputTag$attribs$min = min
@@ -259,10 +259,4 @@ customTextInput <- function(inputId, label, value = "", width = NULL,
                  placeholder = placeholder)
   )
 }
-# customTextInput <- function(inputId, label, value = "") {
-#   tagList(tags$label(label, `for` = inputId),
-#           tags$input(id = inputId,
-#                      type = "text", value = value,
-#                      class="customTextInput form-control shiny-bound-input"))
-# }
 
