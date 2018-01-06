@@ -13,9 +13,9 @@
     return $(scope).find('input.customSliderInput');
   },
     subscribe: function(el, callback) {
-    $(el).on('change.customSliderInputBinding update.customSliderInputBinding', function(event) {
-      callback(!$(el).data('updating') && !$(el).data('animating'));
-    });
+    $(el).on('change.customSliderInputBinding', function(event) {
+      callback(!$(el).data('immediate') && !$(el).data('animating'));
+});
   },
   unsubscribe: function(el) {
     $(el).off('.customSliderInputBinding');
