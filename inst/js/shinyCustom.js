@@ -29,7 +29,7 @@
 
 Shiny.inputBindings.register(customSliderInputBinding, 'shiny.customSliderInput');
 
-$(document).on('focusout', '.irs', function(event) {
+$(document).on('mouseleave', '.irs', function(event) {
   var sliderInput = this.nextSibling;
   $(sliderInput).trigger("focusout");
 });
