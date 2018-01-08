@@ -2,7 +2,7 @@ library(shiny)
 library(shinyCustom)
 
 basicPage(
-  useShinyCustom(slider_delay = 1500),
+  useShinyCustom(slider_delay = 10),
   title = "Inputs with Limited Update-Properties",
   h2("Slow Sliders"),
   p("These sliders wait longer than usual before updating."),

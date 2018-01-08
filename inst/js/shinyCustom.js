@@ -13,7 +13,7 @@
     return $(scope).find('input.customSliderInput');
   },
     subscribe: function(el, callback) {
-    $(el).on('change.customSliderInputBinding', function(event) {
+    $(el).on('focusout.customSliderInputBinding', function(event) {
       callback(!$(el).data('immediate') && !$(el).data('animating'));
 });
   },
@@ -28,6 +28,11 @@
 }});
 
 Shiny.inputBindings.register(customSliderInputBinding, 'shiny.customSliderInput');
+
+$(document).on('focusout', '.irs', function(event) {
+  var sliderInput = this.nextSibling;
+  $(sliderInput).trigger("focusout");
+});
 
 
 /////////////////
